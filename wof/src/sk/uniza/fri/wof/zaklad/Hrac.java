@@ -3,7 +3,9 @@ package sk.uniza.fri.wof.zaklad;
 import sk.uniza.fri.wof.prostredie.Miestnost;
 import sk.uniza.fri.wof.prostredie.Predmet;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Hrac {
@@ -56,7 +58,15 @@ public class Hrac {
 
     public void pouziPredmet(String nazovPredmetu) {
         if (this.inventar.containsKey(nazovPredmetu)) {
-            System.out.format("Predmet %s sa neda pouzit!%n", nazovPredmetu);
+            switch (nazovPredmetu) {
+                case "hodinky" -> {
+                    String timeStamp = new SimpleDateFormat("HH:mm:ss").format(new Date());
+                    System.out.printf("Aktualny cas je %s%n", timeStamp);
+                }
+                default -> {
+                    System.out.format("Predmet %s sa neda pouzit!%n", nazovPredmetu);
+                }
+            }
         } else {
             System.out.println("Predmet nemas.");
         }
