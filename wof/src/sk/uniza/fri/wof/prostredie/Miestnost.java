@@ -1,8 +1,6 @@
 package sk.uniza.fri.wof.prostredie;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Optional;
 
 /**
  * Trieda sk.uniza.fri.wof.prostredie.Miestnost realizuje jednu miestnost/priestor v celom priestore hry.
@@ -17,9 +15,9 @@ import java.util.Optional;
  * @version 2012.02.21
  */
 public class Miestnost {
-    private String popisMiestnosti;
-    private HashMap<String, Miestnost> vychody;
-    private ArrayList<Predmet> predmety;
+    private final String popisMiestnosti;
+    private final HashMap<String, Miestnost> vychody;
+    private final HashMap<String, Predmet> predmety;
 
     /**
      * Vytvori miestnost popis ktorej je v parametrom.
@@ -31,18 +29,11 @@ public class Miestnost {
     public Miestnost(String popis) {
         this.popisMiestnosti = popis;
         this.vychody = new HashMap<>();
-        this.predmety = new ArrayList<>();
+        this.predmety = new HashMap<>();
     }
 
-    public void nastavVychod(String smer, Miestnost sever) {
-        this.vychody.put(smer, sever);
-    }
-
-    /**
-     * @return textovy popis miestnosti.
-     */
-    public String getPopis() {
-        return this.popisMiestnosti;
+    public void nastavVychod(String smer, Miestnost miestnost) {
+        this.vychody.put(smer, miestnost);
     }
 
     /**
@@ -50,7 +41,7 @@ public class Miestnost {
      * @param predmet pokladany predmet
      */
     public void polozPredmet(Predmet predmet) {
-        this.predmety.add(predmet);
+        this.predmety.put(predmet.getNazov(), predmet);
     }
 
     /**
@@ -58,35 +49,28 @@ public class Miestnost {
      * @param nazov nazov zdvihaneho predmetu
      * @return zdvihnuty predmet
      */
-    public Optional<Predmet> zoberPredmet(String nazov) {
-        for (Predmet kontrolovanyPredmet : this.predmety) {
-            if (kontrolovanyPredmet.getNazov().equals(nazov)) {
-                this.predmety.remove(kontrolovanyPredmet);
-                return Optional.of(kontrolovanyPredmet);
-            }
-        }
-
-        return Optional.empty();
+    public Predmet zoberPredmet(String nazov) {
+        return this.predmety.remove(nazov);
     }
 
-    public void vypisMiestnost() {
-        System.out.println("Teraz si v miestnosti " + this.getPopis());
+    public void vypisInfoOMiestnosti() {
+        System.out.println("Teraz si v miestnosti " + this.popisMiestnosti);
         System.out.print("Vychody: ");
-        for (String vychod : this.vychody.keySet()) {
+        for (var vychod : this.vychody.keySet()) {
             System.out.printf("%s ", vychod);
         }
         System.out.println();
 
         if (!this.predmety.isEmpty()) {
             System.out.print("Predmety v miestnosti: ");
-            for (Predmet predmet : this.predmety) {
-                System.out.printf("%s ", predmet.getNazov());
+            for (var predmet : this.predmety.keySet()) {
+                System.out.printf("%s ", predmet);
             }
             System.out.println();
         }
     }
 
-    public Optional<Miestnost> getMiestnostVSmere(String smer) {
-        return Optional.ofNullable(this.vychody.get(smer));
+    public Miestnost getMiestnostVSmere(String smer) {
+        return this.vychody.get(smer);
     }
 }
