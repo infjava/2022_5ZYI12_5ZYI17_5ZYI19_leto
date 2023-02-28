@@ -4,4 +4,6 @@ public interface Predmet {
     String getNazov();
 
     void pouzi();
+
+    boolean daSaPolozit();
 }

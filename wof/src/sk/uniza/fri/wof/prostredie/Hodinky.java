@@ -14,4 +14,9 @@ public class Hodinky implements Predmet {
         String timeStamp = new SimpleDateFormat("HH:mm:ss").format(new Date());
         System.out.printf("Aktualny cas je %s%n", timeStamp);
     }
+
+    @Override
+    public boolean daSaPolozit() {
+        return true;
+    }
 }

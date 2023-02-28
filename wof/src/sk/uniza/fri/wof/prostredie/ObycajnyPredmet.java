@@ -16,4 +16,9 @@ public class ObycajnyPredmet implements Predmet {
     public void pouzi() {
         System.out.format("Predmet %s sa neda pouzit!%n", this.nazov);
     }
+
+    @Override
+    public boolean daSaPolozit() {
+        return true;
+    }
 }

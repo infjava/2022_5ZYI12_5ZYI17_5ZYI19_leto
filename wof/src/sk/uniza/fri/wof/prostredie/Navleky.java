@@ -22,4 +22,9 @@ public class Navleky implements Predmet {
         this.navlekySuObute = !this.navlekySuObute;
 
     }
+
+    @Override
+    public boolean daSaPolozit() {
+        return !this.navlekySuObute;
+    }
 }
