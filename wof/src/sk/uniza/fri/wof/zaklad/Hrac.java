@@ -53,4 +53,12 @@ public class Hrac {
     public Miestnost getAktualnaMiestnost() {
         return this.aktualnaMiestnost;
     }
+
+    public void pouziPredmet(String nazovPredmetu) {
+        if (this.inventar.containsKey(nazovPredmetu)) {
+            System.out.format("Predmet %s sa neda pouzit!%n", nazovPredmetu);
+        } else {
+            System.out.println("Predmet nemas.");
+        }
+    }
 }
