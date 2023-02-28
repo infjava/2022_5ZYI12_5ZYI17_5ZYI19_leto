@@ -3,15 +3,11 @@ package sk.uniza.fri.wof.zaklad;
 import sk.uniza.fri.wof.prostredie.Miestnost;
 import sk.uniza.fri.wof.prostredie.Predmet;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 public class Hrac {
     private Miestnost aktualnaMiestnost;
     private final HashMap<String, Predmet> inventar;
-    private boolean navlekySuObute;
 
     public Hrac(Miestnost aktualnaMiestnost) {
         this.aktualnaMiestnost = aktualnaMiestnost;
@@ -60,25 +56,10 @@ public class Hrac {
     public void pouziPredmet(String nazovPredmetu) {
         var predmet = this.inventar.get(nazovPredmetu);
         if (predmet != null) {
-            switch (predmet.getNazov()) {
-                case "hodinky" -> {
-                    String timeStamp = new SimpleDateFormat("HH:mm:ss").format(new Date());
-                    System.out.printf("Aktualny cas je %s%n", timeStamp);
-                }
-                case "navleky" -> {
-                    if (this.navlekySuObute) {
-                        System.out.println("Vyzul si si navleky");
-                    } else {
-                        System.out.println("Obul si si navleky");
-                    }
-                    this.navlekySuObute = !this.navlekySuObute;
-                }
-                default -> {
-                    System.out.format("Predmet %s sa neda pouzit!%n", nazovPredmetu);
-                }
-            }
+            predmet.pouzi();
         } else {
             System.out.println("Predmet nemas.");
         }
     }
+
 }
