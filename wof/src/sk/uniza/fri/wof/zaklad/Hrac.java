@@ -2,6 +2,7 @@ package sk.uniza.fri.wof.zaklad;
 
 import sk.uniza.fri.wof.prostredie.Miestnost;
 import sk.uniza.fri.wof.prostredie.predmety.Predmet;
+import sk.uniza.fri.wof.prostredie.predmety.Radio;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -76,10 +77,14 @@ public class Hrac {
             System.out.println("Tento predmet nemáš");
             return;
         }
-        predmet.pouzi();
+        predmet.pouzi(this);
     }
 
     public Miestnost getAktualnaMiestnost() {
         return this.aktualnaMiestnost;
+    }
+
+    public Predmet vyberPredmetZInventara(String nazov) {
+        return this.inventar.remove(nazov);
     }
 }
