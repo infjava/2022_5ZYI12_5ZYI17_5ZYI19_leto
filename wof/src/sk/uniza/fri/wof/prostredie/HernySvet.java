@@ -27,9 +27,10 @@ public class HernySvet {
         terasa.polozPredmet(new Hodinky());
         terasa.polozPredmet(new Navleky());
         labak.polozPredmet(new ObycajnyPredmet("mys"));
-        bufet.polozPredmet(new ObycajnyPredmet("bageta"));
         terasa.polozPredmet(new Baterka());
         terasa.polozPredmet(new Radio());
+
+        bufet.postavVybavenie(new Automat());
 
         this.startovaciaMiestnost = terasa;  // startovacia miestnost hry
     }
