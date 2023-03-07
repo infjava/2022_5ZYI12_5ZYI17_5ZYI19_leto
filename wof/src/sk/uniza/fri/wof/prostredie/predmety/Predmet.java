@@ -6,6 +6,4 @@ public interface Predmet {
     String getNazov();
 
     boolean mozemPolozit();
-
-    boolean jeNasadeny();
 }

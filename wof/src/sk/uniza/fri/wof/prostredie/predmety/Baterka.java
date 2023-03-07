@@ -24,9 +24,4 @@ public class Baterka implements Predmet, Pouzitelny {
     public boolean mozemPolozit() {
         return true;
     }
-
-    @Override
-    public boolean jeNasadeny() {
-        return false;
-    }
 }
