@@ -1,6 +1,7 @@
 package sk.uniza.fri.wof.zaklad;
 
 import sk.uniza.fri.wof.prostredie.Miestnost;
+import sk.uniza.fri.wof.prostredie.predmety.Pouzitelny;
 import sk.uniza.fri.wof.prostredie.predmety.Predmet;
 import sk.uniza.fri.wof.prostredie.predmety.Radio;
 import sk.uniza.fri.wof.prostredie.predmety.ReakciaNaPrechadzanie;
@@ -84,7 +85,11 @@ public class Hrac {
             System.out.println("Tento predmet nemáš");
             return;
         }
-        predmet.pouzi(this);
+        if (predmet instanceof Pouzitelny pouzitelnyPredmet) {
+            pouzitelnyPredmet.pouzi(this);
+        } else {
+            System.out.format("Predmet %s sa neda pouzit%n", predmet.getNazov());
+        }
     }
 
     public Miestnost getAktualnaMiestnost() {
