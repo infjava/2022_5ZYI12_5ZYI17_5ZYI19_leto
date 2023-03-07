@@ -1,5 +1,10 @@
 package sk.uniza.fri.wof.prostredie;
 
+import sk.uniza.fri.wof.prostredie.predmety.Hodinky;
+import sk.uniza.fri.wof.prostredie.predmety.Navleky;
+import sk.uniza.fri.wof.prostredie.predmety.ObycajnyPredmet;
+import sk.uniza.fri.wof.prostredie.vychody.VstupDoLabaku;
+
 public class HernySvet {
     private final Miestnost startovaciaMiestnost;
 
@@ -12,19 +17,19 @@ public class HernySvet {
 
         // inicializacia miestnosti = nastavenie vychodov
         terasa.nastavVychod("vychod", aula);
-        terasa.nastavVychod("juh", labak);
+        terasa.nastavVychod("juh", new VstupDoLabaku(labak));
         terasa.nastavVychod("zapad", bufet);
         aula.nastavVychod("zapad", terasa);
         labak.nastavVychod("sever", terasa);
         labak.nastavVychod("vychod", kancelaria);
         kancelaria.nastavVychod("zapad", labak);
+        bufet.nastavVychod("vychod", terasa);
 
         terasa.polozPredmet(new ObycajnyPredmet("kamen"));
-        labak.polozPredmet(new ObycajnyPredmet("mys"));
-        bufet.polozPredmet(new ObycajnyPredmet("bageta"));
-
         terasa.polozPredmet(new Hodinky());
         terasa.polozPredmet(new Navleky());
+        labak.polozPredmet(new ObycajnyPredmet("mys"));
+        bufet.polozPredmet(new ObycajnyPredmet("bageta"));
 
         this.startovaciaMiestnost = terasa;  // startovacia miestnost hry
     }

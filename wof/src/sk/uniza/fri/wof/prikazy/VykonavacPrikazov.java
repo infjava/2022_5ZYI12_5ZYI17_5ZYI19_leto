@@ -15,8 +15,7 @@ import sk.uniza.fri.wof.zaklad.Hrac;
 public class VykonavacPrikazov {
     // konstantne pole nazvov prikazov
     private static final String[] PLATNE_PRIKAZY = {
-        "chod", "zober", "poloz", "inventar", "ukonci", "pomoc",
-        "pouzi"
+        "chod", "zober", "poloz", "inventar", "pouzi", "ukonci", "pomoc"
     };
 
     /**
@@ -63,26 +62,17 @@ public class VykonavacPrikazov {
             case "inventar":
                 hrac.vypisInventar();
                 return false;
+            case "pouzi":
+                this.pouziPredmet(prikaz, hrac);
+                return false;
             case "poloz":
                 this.polozPredmet(prikaz, hrac);
                 return false;
             case "ukonci":
                 return this.ukonciHru(prikaz);
-            case "pouzi":
-                this.pouziPredmet(prikaz, hrac);
-                return false;
             default:
                 return false;
         }
-    }
-
-    private void pouziPredmet(Prikaz prikaz, Hrac hrac) {
-        if (!prikaz.maParameter()) {
-            System.out.println("Pouzi co?");
-            return;
-        }
-
-        hrac.pouziPredmet(prikaz.getParameter());
     }
 
     /**
@@ -133,8 +123,19 @@ public class VykonavacPrikazov {
         }
 
         String predmet = prikaz.getParameter();
-
         hrac.zoberPredmet(predmet);
+    }
+
+    private void pouziPredmet(Prikaz prikaz, Hrac hrac) {
+        if (!prikaz.maParameter()) {
+            // ak prikaz nema parameter - druhe slovo - nevedno co zobrat
+            System.out.println("Pouzi co?");
+            return;
+        }
+
+        String predmet = prikaz.getParameter();
+
+        hrac.pouziPredmet(predmet);
     }
 
     /**
@@ -153,7 +154,6 @@ public class VykonavacPrikazov {
         }
 
         String smer = prikaz.getParameter();
-
         // Pokus o opustenie aktualnej miestnosti danym vychodom.
         hrac.posunVSmere(smer);
     }
