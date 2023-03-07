@@ -3,6 +3,7 @@ package sk.uniza.fri.wof.zaklad;
 import sk.uniza.fri.wof.prostredie.Miestnost;
 import sk.uniza.fri.wof.prostredie.predmety.Predmet;
 import sk.uniza.fri.wof.prostredie.predmety.Radio;
+import sk.uniza.fri.wof.prostredie.predmety.ReakciaNaPrechadzanie;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -26,6 +27,12 @@ public class Hrac {
         } else {
             this.aktualnaMiestnost = vychod.get().dajMiestnost();
             this.aktualnaMiestnost.vypisInfoOMiestnosti();
+
+            for (Predmet predmet : this.inventar.values()) {
+                if (predmet instanceof ReakciaNaPrechadzanie reakciaNaPrechadzanie) {
+                    reakciaNaPrechadzanie.hracZmenilMiestnost();
+                }
+            }
         }
     }
 
