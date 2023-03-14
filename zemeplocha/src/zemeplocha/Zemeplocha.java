@@ -1,6 +1,7 @@
 package zemeplocha;
 
 import hlavnyBalik.Policko;
+import obyvatelia.Magovia;
 import obyvatelia.Tvory;
 import obyvatelia.TypObyvatela;
 
@@ -25,8 +26,9 @@ public class Zemeplocha {
         int cislo = 1;
         for (int i = 0; i < this.policka.length; i++) {
             for (int j = 0; j < this.policka[i].length; j++) {
-
-                if ((cislo % 2) == 0) { //vela zveri
+                if (i == 0 && j == 0) {
+                    this.policka[i][j].setObyvatelia(new Magovia(10, 3));
+                } else if ((cislo % 2) == 0) { //vela zveri
                     this.policka[i][j].setObyvatelia(new Tvory (25, TypObyvatela.SRNKY));
                 } else {
                     if ((cislo % 5) == 0) {
